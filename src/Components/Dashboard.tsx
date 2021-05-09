@@ -7,6 +7,8 @@ import Badge from '@material-ui/core/Badge';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import ModelSelect from './ModelSelect';
 import { useIotDevices } from '../Data/UseIotDevices';
@@ -63,14 +65,22 @@ export default function Dashboard() {
         setRows(rows);
     }, [iotDevices, model]);
 
+    const Topbar = () => (<AppBar position="relative">
+      <Toolbar>
+          <Typography className={classes.title}>
+            Devices
+          </Typography>
+        </Toolbar>
+    </AppBar>);
+
     const toolbar = () => {
         return (
             <div className={classes.root}>
                 <Grid container direction="row" justify="space-between" alignItems="center">
-                    <Grid item xs={6}>
+                    <Grid item sm={6}>
                         <ModelSelect />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item sm={6}>
                         <Button variant="outlined" startIcon={<AddIcon />} onClick={newDevice}>
                             New Device
                         </Button>
@@ -88,6 +98,7 @@ export default function Dashboard() {
                 </Typography>
                 <Paper className={classes.paper} elevation={3}>
                     <div style={{ height: 600, width: '100%' }}>
+                        <Topbar />
                         <DataGrid
                             rows={rows}
                             columns={columns}

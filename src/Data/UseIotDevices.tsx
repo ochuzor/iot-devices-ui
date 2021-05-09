@@ -2,47 +2,11 @@ import React, { useContext, createContext, useState, useEffect } from 'react';
 
 import type { IotDevice } from '../Types';
 
-const sampleDevices: IotDevice[] = [
-    {
-        id: 1,
-        name: 'first (edited) device',
-        serialNumber: 1,
-        model: 'sense-100',
-    },
-    {
-        id: 2,
-        name: 'first (edited) device',
-        serialNumber: 105,
-        model: 'sense-100',
-    },
-    {
-        id: 3,
-        name: 'third device',
-        serialNumber: 1,
-        model: 'sense-100',
-    },
-    {
-        id: 4,
-        name: 'fourth device',
-        serialNumber: 105,
-        model: 'sense-100',
-    },
-    {
-        id: 7,
-        name: 'device 200',
-        serialNumber: 105,
-        model: 'sense-200',
-    },
-    {
-        id: 8,
-        name: 'device 300',
-        serialNumber: 105,
-        model: 'sense-300',
-    },
-];
+const API_URL = process.env.API_URL || "https://localhost:5001/api";
 
 async function getDevices() {
-    return sampleDevices;
+    const resp = await fetch(`${API_URL}/IotDevices`);
+    return resp.json();
 }
 
 function useProvideIotDevices() {

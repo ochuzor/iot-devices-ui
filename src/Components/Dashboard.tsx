@@ -11,6 +11,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import ModelSelect from './ModelSelect';
+import TableRowActions from './TableRowActions';
 import { useIotDevices } from '../Data/UseIotDevices';
 import type {IotDevice} from '../Types';
 
@@ -51,6 +52,12 @@ const columns: GridColDef[] = [
     },
     { field: 'model', headerName: 'Model', width: 130 },
     { field: 'serialNumber', headerName: 'Serial', width: 130 },
+    {
+        field: 'Actions',
+        headerName: 'Actions',
+        width: 150,
+        renderCell: (params: GridValueGetterParams) => <TableRowActions device={params.row as IotDevice} />
+    },
 ];
 
 export default function Dashboard() {

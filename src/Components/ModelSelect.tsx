@@ -5,7 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import { useIotDevices } from "../Data/UseIotDevices";
 import type { ModelType } from '../Types';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,12 +19,16 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export default function ModelSelect() {
+type IProps = {
+    model: ModelType | '';
+    onModelChange: (model: ModelType | '') => void;
+};
+
+export default function ModelSelect({model, onModelChange}: IProps) {
     const classes = useStyles();
-    const { model, setModel } = useIotDevices();
 
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setModel(event.target.value as '' | ModelType);
+        onModelChange(event.target.value as '' | ModelType);
     };
 
     return (

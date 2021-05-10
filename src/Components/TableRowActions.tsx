@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 import type { IotDevice } from "../Types";
+import { useIotDevices } from '../Data/UseIotDevices';
 
 type IProps = {
     device: IotDevice;
@@ -20,16 +21,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TableActions({ device }: IProps) {
     const classes = useStyles();
+    const { setDeviceToEdit, deleteDevice } = useIotDevices();
 
     const editDevice = () => {
-        console.log(`editing ${device.name}`)
+        setDeviceToEdit({ ...device });
     };
 
-    const deleteDevice = () => {
+    const onDeviceDelete = () => {
         const confirmMessage = `Are you sure you want to delete device ${device.name},
             serial number: ${device.serialNumber}`;
         if (window.confirm(confirmMessage)) {
-            console.log(`deleting ${device.name}`)
+            deleteDevice(device);
         }
     };
 
@@ -37,7 +39,7 @@ export default function TableActions({ device }: IProps) {
         <IconButton color="primary" aria-label="edit" onClick={editDevice}>
             <EditIcon />
         </IconButton>
-        <IconButton color="secondary" aria-label="delete" onClick={deleteDevice}>
+        <IconButton color="secondary" aria-label="delete" onClick={onDeviceDelete}>
             <DeleteIcon />
         </IconButton>
     </div>);

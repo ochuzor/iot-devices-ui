@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -13,7 +13,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ModelSelect from './ModelSelect';
 import TableRowActions from './TableRowActions';
 import { useIotDevices } from '../Data/UseIotDevices';
-import type {IotDevice} from '../Types';
+import type {IotDevice, ModelType} from '../Types';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -62,15 +62,18 @@ const columns: GridColDef[] = [
 
 export default function Dashboard() {
     const classes = useStyles();
-    const { iotDevices, model } = useIotDevices();
-    const [ rows, setRows ] = useState<IotDevice[]>([]);
+    const { iotDevices, setDeviceToEdit } = useIotDevices();
+    const [model, setModel] = useState<'' | ModelType>('');
 
-    const newDevice = () => console.log('creating a new device');
+    const newDevice = () => {
+        setDeviceToEdit({
+            name: '',
+            model: 'sense-100',
+            serialNumber: 1001,
+        });
+    };
 
-    useEffect(() => {
-        const rows = model === '' ? iotDevices : iotDevices.filter(d => d.model === model);
-        setRows(rows);
-    }, [iotDevices, model]);
+    const rows = model === '' ? iotDevices : iotDevices.filter(d => d.model === model);
 
     const Topbar = () => (<AppBar position="relative">
       <Toolbar>
@@ -85,7 +88,7 @@ export default function Dashboard() {
             <div className={classes.root}>
                 <Grid container direction="row" justify="space-between" alignItems="center">
                     <Grid item sm={6}>
-                        <ModelSelect />
+                        <ModelSelect model={model} onModelChange={setModel} />
                     </Grid>
                     <Grid item sm={6}>
                         <Button variant="outlined" startIcon={<AddIcon />} onClick={newDevice}>

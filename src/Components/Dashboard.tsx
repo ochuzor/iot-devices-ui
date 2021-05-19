@@ -5,13 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import Badge from '@material-ui/core/Badge';
 import Grid from '@material-ui/core/Grid';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 
 import TableRowActions from './TableRowActions';
 import { useIotDevices } from '../Data/UseIotDevices';
 import type { IotDevice, ModelType } from '../Types';
 import DashboardToolbar from './DashboardTopMenu';
+import Topbar from './DashboardTopbar';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -23,13 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(2),
             textAlign: 'center',
             color: theme.palette.text.secondary,
-        },
-        title: {
-            flexGrow: 1,
-            textAlign: 'left',
-        },
-        toolbar: {
-            flexGrow: 1,
         },
     })
 );
@@ -64,14 +56,6 @@ export default function Dashboard() {
     const [model, setModel] = useState<'' | ModelType>('');
 
     const rows = model === '' ? iotDevices : iotDevices.filter(d => d.model === model);
-
-    const Topbar = () => (<AppBar position="relative">
-      <Toolbar>
-          <Typography className={classes.title}>
-            Devices
-          </Typography>
-        </Toolbar>
-    </AppBar>);
 
     return (
         <div className={classes.root}>

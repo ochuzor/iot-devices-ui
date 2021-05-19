@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Badge from '@material-ui/core/Badge';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import ModelSelect from './ModelSelect';
 import TableRowActions from './TableRowActions';
 import { useIotDevices } from '../Data/UseIotDevices';
-import type {IotDevice, ModelType} from '../Types';
+import type { IotDevice, ModelType } from '../Types';
+import DashboardToolbar from './DashboardToolbar';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -62,16 +60,8 @@ const columns: GridColDef[] = [
 
 export default function Dashboard() {
     const classes = useStyles();
-    const { iotDevices, setDeviceToEdit } = useIotDevices();
+    const { iotDevices } = useIotDevices();
     const [model, setModel] = useState<'' | ModelType>('');
-
-    const newDevice = () => {
-        setDeviceToEdit({
-            name: '',
-            model: 'sense-100',
-            serialNumber: 1001,
-        });
-    };
 
     const rows = model === '' ? iotDevices : iotDevices.filter(d => d.model === model);
 
@@ -82,23 +72,6 @@ export default function Dashboard() {
           </Typography>
         </Toolbar>
     </AppBar>);
-
-    const toolbar = () => {
-        return (
-            <div className={classes.root}>
-                <Grid container direction="row" justify="space-between" alignItems="center">
-                    <Grid item sm={6}>
-                        <ModelSelect model={model} onModelChange={setModel} />
-                    </Grid>
-                    <Grid item sm={6}>
-                        <Button variant="outlined" startIcon={<AddIcon />} onClick={newDevice}>
-                            New Device
-                        </Button>
-                    </Grid>
-                </Grid>
-            </div>
-        );
-    };
 
     return (
         <div className={classes.root}>
@@ -117,7 +90,7 @@ export default function Dashboard() {
                             disableSelectionOnClick
                             disableColumnSelector
                             rowsPerPageOptions={[5, 10, 20]}
-                            components={{ Toolbar: toolbar }}
+                            components={{ Toolbar: () => <DashboardToolbar model={model} onModelChange={setModel} /> }}
                         />
                     </div>
                 </Paper>

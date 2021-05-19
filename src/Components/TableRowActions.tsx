@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-import type { IotDevice } from "../Types";
+import type { IotDevice } from '../Types';
 import { useIotDevices } from '../Data/UseIotDevices';
 
 type IProps = {
@@ -13,9 +13,9 @@ type IProps = {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
 }));
 

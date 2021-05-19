@@ -46,18 +46,18 @@ const getValidSerialNumber = (sn: string) => {
 };
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    form: {
-      display: 'flex',
-      flexDirection: 'column',
-      margin: 'auto',
-      width: 'fit-content',
-    },
-    formControl: {
-      marginTop: theme.spacing(2),
-      minWidth: 120,
-    },
-  }),
+    createStyles({
+        form: {
+            display: 'flex',
+            flexDirection: 'column',
+            margin: 'auto',
+            width: 'fit-content',
+        },
+        formControl: {
+            marginTop: theme.spacing(2),
+            minWidth: 120,
+        },
+    }),
 );
 
 export default function EditDeviceDialog() {

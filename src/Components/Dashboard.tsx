@@ -11,7 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import TableRowActions from './TableRowActions';
 import { useIotDevices } from '../Data/UseIotDevices';
 import type { IotDevice, ModelType } from '../Types';
-import DashboardToolbar from './DashboardToolbar';
+import DashboardToolbar from './DashboardTopMenu';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

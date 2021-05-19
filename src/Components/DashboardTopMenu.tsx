@@ -34,7 +34,7 @@ type IProps = {
     onModelChange: (model: ModelType | '') => void;
 };
 
-export default function DashboardToolbar({model, onModelChange}: IProps) {
+export default function DashboardTopMenu({model, onModelChange}: IProps) {
     const classes = useStyles();
     const { setDeviceToEdit } = useIotDevices();
 

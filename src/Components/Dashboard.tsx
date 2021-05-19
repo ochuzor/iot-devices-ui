@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Badge from '@material-ui/core/Badge';
 import Grid from '@material-ui/core/Grid';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
@@ -63,21 +62,19 @@ export default function Dashboard() {
                 <Typography variant="h4" component="h1" gutterBottom>
                     Dashboard
                 </Typography>
-                <Paper className={classes.paper} elevation={3}>
-                    <div style={{ height: 600, width: '100%' }}>
-                        <Topbar />
-                        <DataGrid
-                            rows={rows}
-                            columns={columns}
-                            pageSize={5}
-                            disableColumnMenu
-                            disableSelectionOnClick
-                            disableColumnSelector
-                            rowsPerPageOptions={[5, 10, 20]}
-                            components={{ Toolbar: () => <DashboardToolbar model={model} onModelChange={setModel} /> }}
-                        />
-                    </div>
-                </Paper>
+                <div style={{ height: 500, width: '100%' }}>
+                    <Topbar />
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={5}
+                        disableColumnMenu
+                        disableSelectionOnClick
+                        disableColumnSelector
+                        rowsPerPageOptions={[5, 10, 20]}
+                        components={{ Toolbar: () => <DashboardToolbar model={model} onModelChange={setModel} /> }}
+                    />
+                </div>
             </Grid>
         </div>
     );
